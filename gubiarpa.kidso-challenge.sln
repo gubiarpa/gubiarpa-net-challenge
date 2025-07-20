@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gubiarpa.kidso-challenge.co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gubiarpa.kidso-challenge.console.tests", "gubiarpa.kidso-challenge.console.tests\gubiarpa.kidso-challenge.console.tests.csproj", "{D94901CD-C2EC-494A-B511-05E2D3D16778}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gubiarpa.kidso-challenge.webapi", "gubiarpa.kidso-challenge.webapi\gubiarpa.kidso-challenge.webapi.csproj", "{4A0C0F89-97D9-4B69-B456-652A177E6B24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{D94901CD-C2EC-494A-B511-05E2D3D16778}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D94901CD-C2EC-494A-B511-05E2D3D16778}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D94901CD-C2EC-494A-B511-05E2D3D16778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A0C0F89-97D9-4B69-B456-652A177E6B24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A0C0F89-97D9-4B69-B456-652A177E6B24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A0C0F89-97D9-4B69-B456-652A177E6B24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A0C0F89-97D9-4B69-B456-652A177E6B24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2FDD869E-F154-4753-9E45-0F9A67E1811C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{D94901CD-C2EC-494A-B511-05E2D3D16778} = {B66B21E1-9799-4206-9606-D1C422717A0F}
+		{4A0C0F89-97D9-4B69-B456-652A177E6B24} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9BE03BB8-5490-4246-A727-BDD8C2AEA21D}
