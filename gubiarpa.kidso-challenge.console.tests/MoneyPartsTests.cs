@@ -5,7 +5,7 @@
         [Theory]
         [InlineData("0.1", 2)]    // [0.05, 0.05] and [0.1]
         [InlineData("0.5", 13)]   // Should produce multiple combinations
-        [InlineData("1", 19)]     // Should produce multiple combinations
+        [InlineData("1", 50)]     // Should produce multiple combinations
         public void Build_ReturnsExpectedCombinationCount(string input, int expectedCount)
         {
             // Arrange
@@ -15,7 +15,7 @@
             var result = moneyParts.Build(input);
 
             // Assert
-            Assert.True(result.Count >= expectedCount, $"Expected at least {expectedCount} combinations, got {result.Count}");
+            Assert.True(result.Count == expectedCount, $"Expected at least {expectedCount} combinations, got {result.Count}");
         }
 
         [Theory]
