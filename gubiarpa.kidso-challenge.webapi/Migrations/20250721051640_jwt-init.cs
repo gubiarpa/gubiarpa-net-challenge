@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace gubiarpa.kidso_challenge.webapi.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class jwtinit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

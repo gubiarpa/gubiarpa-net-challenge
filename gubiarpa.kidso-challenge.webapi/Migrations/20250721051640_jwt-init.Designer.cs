@@ -12,8 +12,8 @@ using gubiarpa.kidso_challenge.webapi.Data;
 namespace gubiarpa.kidso_challenge.webapi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250721010323_Init")]
-    partial class Init
+    [Migration("20250721051640_jwt-init")]
+    partial class jwtinit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
