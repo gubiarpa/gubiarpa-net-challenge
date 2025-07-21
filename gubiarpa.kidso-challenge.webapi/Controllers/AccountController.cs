@@ -1,11 +1,12 @@
 ﻿using gubiarpa.kidso_challenge.webapi.Entities;
+using gubiarpa.kidso_challenge.webapi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace gubiarpa.kidso_challenge.webapi.Controllers
@@ -14,13 +15,13 @@ namespace gubiarpa.kidso_challenge.webapi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        
+
         private readonly JwtSettings _jwtSettings;
 
         public AccountController(
-            UserManager<IdentityUser> userManager,
+            UserManager<User> userManager,
             RoleManager<IdentityRole> roleManager,
             IConfiguration configuration,
             IOptions<JwtSettings> jwtConfiguration)
@@ -30,10 +31,21 @@ namespace gubiarpa.kidso_challenge.webapi.Controllers
             _jwtSettings = jwtConfiguration.Value;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] Register model)
         {
-            var user = new IdentityUser { UserName = model.Username, Email = model.Email };
+            var dateNow = DateTime.UtcNow;
+            var username = User.Claims.FirstOrDefault(x => x.Type.Equals(JwtRegisteredClaimNames.Name))?.Value;
+            var user = new User
+            {
+                UserName = model.Username,
+                Email = model.Email,
+                CreatedBy = username,
+                CreatedOn = dateNow,
+                UpdatedBy = username,
+                UpdatedOn = dateNow,
+            };
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
@@ -52,9 +64,10 @@ namespace gubiarpa.kidso_challenge.webapi.Controllers
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
-
                 var authClaims = new List<Claim>
                 {
+                    new(JwtRegisteredClaimNames.Name, user.UserName),
+                    new(JwtRegisteredClaimNames.Email, user.Email),
                     new(JwtRegisteredClaimNames.Sub, user.UserName!),
                     new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
@@ -74,6 +87,7 @@ namespace gubiarpa.kidso_challenge.webapi.Controllers
             return Unauthorized();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("add-role")]
         public async Task<IActionResult> AddRole([FromBody] string role)
         {
@@ -91,6 +105,7 @@ namespace gubiarpa.kidso_challenge.webapi.Controllers
             return BadRequest("Role already exists");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("assign-role")]
         public async Task<IActionResult> AssignRole([FromBody] UserRole model)
         {
